@@ -125,5 +125,38 @@ public class AviaSoulsTest {
         Assertions.assertArrayEquals(expected, actual);
     }
 
+    @Test
+    public void comparatorSearchAndSortOneTicket() {
+        AviaSouls avia = new AviaSouls();
+        TicketTimeComparator timeComp = new TicketTimeComparator();
+        Ticket ticket1 = new Ticket("DME", "LED", 6700, 5, 8);
+        Ticket ticket2 = new Ticket("DME", "OVB", 9390, 4, 9);
+        avia.add(ticket1);
+        avia.add(ticket2);
+        Ticket[] order = avia.searchAndSortBy("DME", "LED", timeComp);
+
+        Ticket[] expected = {ticket1};
+        Ticket[] actual = order;
+
+        Assertions.assertArrayEquals(expected, actual);
+
+    }
+
+    @Test
+    public void comparatorSearchAndSortNull() {
+        AviaSouls avia = new AviaSouls();
+        TicketTimeComparator timeComp = new TicketTimeComparator();
+        Ticket ticket1 = new Ticket("DME", "LED", 6700, 5, 8);
+        Ticket ticket2 = new Ticket("DME", "LED", 9900, 7, 9);
+        avia.add(ticket1);
+        avia.add(ticket2);
+        Ticket[] order = avia.searchAndSortBy("OVB", "LED", timeComp);
+
+        Ticket[] expected = {};
+        Ticket[] actual = order;
+
+        Assertions.assertArrayEquals(expected, actual);
+
+    }
 }
 
